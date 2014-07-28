@@ -82,9 +82,6 @@ TARGET_ENABLE_QC_AV_ENHANCEMENTS := true
 # temp remove - causing issues with short/long presses
 # KERNEL_HAS_GETTIMEOFDAY_HELPER := true
 
-# We have the new GPS driver
-BOARD_HAVE_NEW_QC_GPS := true
-
 # Use CAF media driver variant for 8960
 TARGET_QCOM_MEDIA_VARIANT := caf
 
@@ -117,3 +114,12 @@ BOARD_SEPOLICY_UNION += \
         ueventd.te \
         wpa.te \
         wpa_socket.te
+
+# Offmode charging
+#
+# First we override the define to use lpm.rc, as it causes problems
+# with kitkat bootloaders. Then we define the command line to indicate
+# when power off charging is activated.
+BOARD_CHARGING_MODE_BOOTING_LPM :=
+BOARD_CHARGING_CMDLINE_NAME := "androidboot.bootchg"
+BOARD_CHARGING_CMDLINE_VALUE := "true"
